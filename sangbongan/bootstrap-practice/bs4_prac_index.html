@@ -1,0 +1,315 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS cheet sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="col-fluid">
+            <div>
+                <h1>
+                    부트스트랩 치트시트 by 안상봉
+                </h1>
+            </div>
+            <div class="card">
+                <div class="p-3">
+                    머리말
+                    <pre>
+                        부트스트랩 4.6 버전 기준으로 작성. 
+                        DM9도 부트스트랩 4 기반임
+                        핵심적인 내용은 다른 버전과 큰차이 없음
+                        주로 쓰는건 3,4 이며, 최근 클래스이름 약간 변경+애니메이션 빵빵한 5가 나왔으나,
+                        부트스트랩은 갈수록 안쓰는 추세. but 배우기 쉽고 이미 부트스트랩으로 구축된 사이트가 매우매우 많고
+                        입문용으로 최고인거 같음
+                    </pre>
+                </div>
+            </div>
+            <div class="card border-warning">
+                <pre>
+
+                    자주 쓰는 요소 
+                    1. 레이아웃
+                        - 기본 구성
+                            - body
+                            - header
+                                - nav
+                            - main
+                                - section
+                                - arcicle
+                            - aside
+                            - footer
+                        - 시맨틱 태그 활용한 메뉴 구성 + 안에 콘텐츠 집어넣고 콘텐츠 삽입
+                            - 구성하기 나름이며, 꼭 저대로 안해도 됨
+                            - 쟤네들 안에 .container 넣고 그리드 적용한 div로 컨텐츠를 배치함
+                            - 기본적으로 부트스트랩4는 flex 기반으로 레이아웃이 작성되었으나, 다른것도 쓸수는 있음
+        
+                        - 그리드 시스템 (css grid 랑은 다르다)
+                            - container
+                                - 모든 부트스트랩 요소가 담기는 기본 컨테이너
+                                - 보통 div.container 태그를 만들어 이걸로 싼(wrap)다
+                                - 두종류가 있음.
+                                    - 가로 마진 적당히 조절되는 container
+                                        - 미디어쿼리 중단점마다 max-width 가 변함
+                                    - 뷰포트에 무조건 꽉차는 fluid-container
+        
+                        - xs , sm , md , lg, xl, fluid
+                            - 디바이스의 사이즈를 의미함.
+                            - bs4는 모바일 퍼스트. 사이즈 미지정시 768px 미만 디바이스에서 운용됨을 기본가정으로 함
+                            - 미디어쿼리로 중단점이 매겨져 있음
+                            - 클래스이름에 얘네들이 들어가 있으면, 뷰포트 width 가 중단점 도달시 해당 클래스의 사이즈가 적용되
+        
+                        - 12 컬럼 베이스
+                            - 태그에 클래스를 매겨 간격을 설정함
+                            - 총합이 무조건 12일 필요는 없다
+                            - 특정 컨테이너에 꽉차게 하고 싶으면  div.col-6, div.col-6 이거 두개
+                            - 클래스 이름을 (레이아웃구성-디바이스사이즈-컬럼사이즈)
+                            - 오프셋 → 무쓸모
+        
+                        - z-인덱스
+                            $zindex-dropdown:          1000 !default;
+                            $zindex-sticky:            1020 !default;
+                            $zindex-fixed:             1030 !default;
+                            $zindex-modal-backdrop:    1040 !default;
+                            $zindex-modal:             1050 !default;
+                            $zindex-popover:           1060 !default;
+                            $zindex-tooltip:           1070 !default;
+                            컴포넌트 z인덱스 기본값. 커스텀시 주의
+                        
+                    2. 콘텐츠
+                        - css 리셋
+                        - 컬러
+                        - 폰트
+                        - 이미지
+                            - 피규어
+                        - 테이블 
+        
+                    3. 컴포넌트
+                        - alert
+                        - badge
+                        - breadcrumb
+                        - button
+                        - button group
+                        - card
+                        - carousel
+                        - collapse
+                        - dropdowns
+                        - forms
+                        - input group
+                        - jumbotron
+                        - list group
+                        - media object
+                        - modal
+                        - nav
+                        - navbar
+                        - pagination
+                        - popover
+                        - progress
+                        - scrollspy
+                        - spinners
+                        - toasts
+                        - tooltips
+        
+                    4. 유틸리티
+                        - Border
+                            더하기 border-black
+                            빼기
+                            사이즈
+                            둥글게 rounded
+
+                        - Clearfix
+                            클리어픽스란? 
+                                부모요소가 자식요소를 감싸고 있을 때, 
+                                자식에게 float 적용하면
+                                부모요소가 자식요소를 감싸지 못하고, 
+                                높이값을 파악하지 못하는 버그가 발생
+                                이 float를 초기화(clear)하여 버그를 고쳐(fix)주는게 clearfix
+                                clear:fix 스타일 적용하여 해결하나, bs4에서 기본기능 제공중.    
+        
+                        - Close icon
+                            class = "close" aria-label="close" 
+        
+                        - Colors
+                            시맨틱 컬러
+                            기본제공 컬러
+                            컬러 커스터마이징
+        
+                        - Display
+                            css 디스플레이 를 조정 가능함.
+                            .d-{value} for xs
+                            .d-{breakpoint}-{value} for sm, md, lg, and xl.
+                        
+                        - Embed
+                            iframe, video, embed 쓸수있는데, 
+                            video가 제일 나은거같다
+        
+                        - Flex
+                            d-flex
+                            d-inline-flex
+                            d-sm-inline-flex
+        
+                            먼저 디스플레이 선언 후
+                                direction
+                                justify
+                                    축 방향과 같게 정렬
+                                align
+                                    축 방향과 수직으로 정렬
+                                align-self
+                                fill
+                                grow & shrink
+                                    안쓰는게 좋다고 생각.
+                                    엘리먼트가 존재함에도 안보일 수 있다
+                                auto margin
+                                wrap
+                                order
+                                align-content
+                        - float
+                            float-right, float-left, float-none
+                            나는 잘 안씀. 플렉스 놔두고 왜..?
+        
+                        - image replacement
+                            이미지를 대체 클래스로 전환함
+                            굳이 쓸필요가..?
+
+                        - interactions
+                            탭으로 포커싱 가능한지, 클릭시 어떻게 되는지
+                            IE, 엣지에서 이 클래스 전체를 지원 안함.
+                            다른 브라우저에선, .user-select-all 지원 안함 
+                            호환성 고려해봤을 때, 가급적 사용 자제.
+                            .user-select-all 이 엘리먼트 클릭시 본문 전체가 선택
+                            .user-select-auto 기본설정
+                            .user-select-none 선택 불가 
+
+                        - overflow
+                            .overflow-auto
+                            .overflow-hidden
+                            두가지만 있으면 되지!
+                            
+                        - position
+                            .position-static
+                            .position-relative
+
+                            .position-fixed
+                                .position-fixed-top
+                                .position-fixed-bottom
+
+                            .position-sticky
+                                .position-sticky-top
+                                
+                        - screen readers
+                            엘리먼트를 숨기고, 화면리더기만 볼수있게
+                            .sr-only
+                            .sr-only-focusable
+
+                        - shadow
+                            기본적으로 해제된 상태,
+
+                            .shodow-none
+                            .shodow-small
+                            .shodow
+                            .shodow-lg
+                            
+                        - sizing
+                            {종류}-{사이즈}
+                                종류 : w h mw mh min-vw min-vh vw vh
+                                사이즈 : 25 50 75 100
+                                사이즈를 수동지정하는게 맞을까?
+
+                        - spacing
+                            [] : 선택
+                            {property}{side}-[{breakpoint}-]{size}
+                            property
+                                m 마진
+                                p 패딩
+                            side
+                                {empty} 4방향
+                                t top
+                                b bottom
+                                l left
+                                r right
+                                x 좌우
+                                y 상하
+                            size
+                                $spacer : 디폴트로 1rem
+                                sass 없으면 그냥 1rem
+                                0 - for classes that eliminate the margin or padding by setting it to 0
+                                1 - (by default) for classes that set the margin or padding to $spacer * .25
+                                2 - (by default) for classes that set the margin or padding to $spacer * .5
+                                3 - (by default) for classes that set the margin or padding to $spacer
+                                4 - (by default) for classes that set the margin or padding to $spacer * 1.5
+                                5 - (by default) for classes that set the margin or padding to $spacer * 3
+                                auto - for classes that set the margin to auto
+
+                        - stretched link
+                            .stretched-link
+                                특정 엘리먼트의 링크 클릭범위를 containing-block 으로 설정
+                                :after 슈도 클래스를 이용하여 설정
+                                그냥 w-100 하면 안되나..
+                                but 불필요한 html 래핑은 지양한다
+
+                        - text : 엘리먼트에 text 속성을 부여한다
+                            text-{중단점}-{속성부여}
+                            속성부여
+                                정렬align
+                                    left
+                                    justify
+                                    center
+                                    right
+                                래핑&오버플로우
+                                    wrap : 텍스트를 싼다. 세로로 길어진다
+                                    nowrap : 그냥 튀어나간다
+                                    truncate : ...으로 생략, display:block 이어야 하며 max-width 있으면 좋다
+                                다음줄로넘기기(wordbreak)
+                                    break : word-break:break-word;word-wrap:break-word; 로 설정해
+                                        텍스트가 길어질때 레이아웃 깨짐을 방지한다. 플렉스 컨테이너에서 글자 튀어나갈때 사용 
+
+                                대소문자
+                                    lowercase
+                                    uppercase
+                                    capitalize : 첫글자만 바꾼다
+
+                                폰트웨이트
+                                    font-weight-{속성}
+                                        bold
+                                        bolder
+                                        normal
+                                        light
+                                        lighter
+                                    font-italic
+
+                                모노스페이스 폰트
+                                    monospace
+                                컬러 리셋(부모로부터 색 상속)
+                                    text-muted
+                                텍스트 데코레이션 없애기
+                                    text-decoration-none 
+
+                        - vertical align
+                            잘 안쓴다
+                                vertial-alignment 속성을 조작
+                                inline, inline-block, inline-table, table-cell 엘리먼트에만 작동하니 유의
+                                align-baseline
+                                align-top
+                                align-middle
+                                align-bottom
+                                align-text-top
+                                align-text-bottom
+                            
+                        - visibility
+                            .visible
+                            .invisible
+                    
+                    4. 자주쓰이는 클래스 값 정리표
+                        - 공통
+                        - 사이징
+                        - 컬러
+                        - 
+
+                </pre>
+            </div>
+        
+        </div>
+    </div>
+</body>
+</html>

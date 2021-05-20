@@ -1,0 +1,12 @@
+{
+    /* prettier 를 에디터 기본 포매터로 설정 */
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    /* 저장할 때마다 포매팅 적용 */
+    "editor.formatOnSave": true,
+    /* ES린트 경고문을 항상 띄운다 */
+    "eslint.alwaysShowStatus": true,
+    /* ES린트 작업경로 지정. 프로젝트 내 설정파일 기준으로 린팅 */
+    "eslint.workingDirectories": ["."],
+    
+  }
+  

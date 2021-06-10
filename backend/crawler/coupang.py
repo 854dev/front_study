@@ -45,6 +45,7 @@ for x in product_list:
     thumbnail_url = x.select_one('a > dl > dt.image > img').attrs['src']
     if thumbnail_url == '//img1a.coupangcdn.com/image/coupang/search/blank1x1.gif':
         thumbnail_url = x.select_one('a > dl > dt.image > img').attrs['data-img-src']
+    url = 'www.coupang.com' + x.select_one('a.search-product-link').attrs['href']
     try:
         rating = x.select_one('em.rating').get_text()
     except:
@@ -57,6 +58,7 @@ for x in product_list:
         'name' : name,
         'price' : price,
         'thumbnail' : thumbnail_url,
+        'url' : url,
         'rating' : rating,
         'rating_count' : rating_count
     }

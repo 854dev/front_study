@@ -28,7 +28,7 @@ product_list = html.select('ul#productList li')
 product_data = []
 for x in product_list:
 
-    if x.attrs['class'][1] == 'search-product__ad-badge':
+    if 'search-product__ad-badge' in x.attrs['class']:
         continue
     name = x.select_one('a > dl > dd.descriptions > div > div.name').get_text()
     try:

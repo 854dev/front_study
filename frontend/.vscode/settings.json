@@ -7,6 +7,5 @@
     "eslint.alwaysShowStatus": true,
     /* ES린트 작업경로 지정. 프로젝트 내 설정파일 기준으로 린팅 */
     "eslint.workingDirectories": ["."],
-    
   }
   

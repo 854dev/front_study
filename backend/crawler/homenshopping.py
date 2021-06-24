@@ -1,9 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from pprint import pprint
-
-
-keyword = input('키워드 입력하셈: ')
 
 def get_hns_data(keyword):
 
@@ -26,16 +22,12 @@ def get_hns_data(keyword):
             #     price = li.select_one('div.textZone > p.sale_price > em').text
             
             data = {
-                'title': li.select_one('div.textZone > p.goodsName > a > span').text,
-                'image': li.select_one('div.img > a > img').get('src'),
-                'price': li.select_one('div.textZone > p.price > em').text if li.select_one('div.textZone > p.price > em') else li.select_one('div.textZone > p.sale_price > em').text,
-                'url': li.select_one('div.img > a').get('href'),
-                'rating': 0,
-                'rating_cnt': 0,
+                'product_title': li.select_one('div.textZone > p.goodsName > a > span').text,
+                'product_thumbnail': li.select_one('div.img > a > img').get('src'),
+                'product_price': li.select_one('div.textZone > p.price > em').text if li.select_one('div.textZone > p.price > em') else li.select_one('div.textZone > p.sale_price > em').text,
+                'product_url': li.select_one('div.img > a').get('href'),
+                'product_rating': 0,
+                'product_rating_cnt': 0,
             }
             result.append(data)
     return result
-
-
-result = get_hns_data(keyword)
-pprint(result)

@@ -1,6 +1,18 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Breadcrumb, Row, Input, Space, Spin } from 'antd';
+import {
+  Layout,
+  Menu,
+  Breadcrumb,
+  Row,
+  Input,
+  Space,
+  Spin,
+  Button,
+} from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'store/index';
+import * as action from 'store/mallReducer';
 import { getItems } from '../api/api';
 import MallCard from './MallCards';
 import ImgA from '../asset/img/img/react.png';
@@ -16,6 +28,10 @@ interface IData {
 }
 
 function Template() {
+  const dispatch = useDispatch();
+  console.log(dispatch);
+  const { number } = useSelector((state: RootState) => state.numberReducer);
+  console.log(number);
   const [mallItems, setMallItems] = useState<any>([]);
 
   // const apiData: IData[] = [
@@ -192,14 +208,22 @@ function Template() {
   const { Search } = Input;
 
   const getItemsApi = () => {
-    const items = getItems();
-    items.then((res) => setMallItems(res));
+    getItems().then((res) => setMallItems(res));
     console.log(mallItems);
   };
 
   useEffect(() => {
     getItemsApi();
   }, []);
+
+  // const increaseModule = () => {
+  //   console.log('asd');
+  //   dispatch(action.increaseAction);
+  // };
+
+  // const decreaseModule = () => {
+  //   dispatch(action.decreaseAction);
+  // };
 
   const onSearch = (value: any) => console.log(value);
 
@@ -257,6 +281,9 @@ function Template() {
             {mallItems.length === 0 ? <Spin /> : renderCard(mallItems)}
           </Row>
         </div>
+        <Button onClick={() => dispatch(action.decreaseAction())}>-</Button>
+        {number}
+        <Button onClick={() => dispatch(action.increaseAction())}>+</Button>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©2018 Created by Ant UED

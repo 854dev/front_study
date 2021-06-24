@@ -19,7 +19,7 @@ const apiData: IData[] = [
     thumbnail: ImgB,
     goodsUrl: 'https://google.com',
     rating: 5,
-    rating_cnt: 2,
+    rating_cnt: 852,
   },
   {
     name: '애플워치',

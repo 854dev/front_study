@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './style.css';
 import configure from './store/configure';
-
+// Allows for server-side rendering.
 const store = configure();
 
 ReactDOM.render(

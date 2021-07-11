@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import {
@@ -8,23 +9,23 @@ import {
   Input,
   Space,
   Spin,
-  Button,
+  Collapse,
 } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/index';
-import * as action from 'store/mallReducer';
+// import * as action from 'store/mallReducer';
 import { getItems } from '../api/api';
 import MallCard from './MallCards';
 import ImgA from '../asset/img/img/react.png';
-// import ImgB from '../asset/img/img/watch.jpg';
+// import ImgB from '../asset/img/img/watch.jpg';`
 
 interface IData {
-  name: string;
-  price: string;
-  thumbnail: string;
-  goodsUrl: string;
-  rating: number;
-  rating_cnt: number;
+  product_title: string;
+  product_price: string;
+  product_thumbnail: string;
+  product_url: string;
+  product_rating: number;
+  product_rating_cnt: string;
 }
 
 function Template() {
@@ -226,23 +227,27 @@ function Template() {
   // };
 
   const onSearch = (value: any) => console.log(value);
+  const { Panel } = Collapse;
+
+  const callback = (key: any) => {
+    console.log(key);
+  };
 
   const renderCard = (itemList: IData[]): React.ReactNode => {
     return itemList.map((item: IData, index: number) => {
       return (
         <MallCard
           key={index}
-          name={item.name}
-          price={item.price}
-          goodsUrl={item.goodsUrl}
-          thumbnail={item.thumbnail}
-          rating={item.rating}
-          rating_cnt={item.rating_cnt}
+          name={item.product_title}
+          price={item.product_price}
+          thumbnail={item.product_thumbnail}
+          goodsUrl={item.product_url}
+          rating={Number(item.product_rating)}
+          rating_cnt={item.product_rating_cnt}
         />
       );
     });
   };
-
   const { Header, Content, Footer } = Layout;
   return (
     <Layout className='layout'>
@@ -277,13 +282,23 @@ function Template() {
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <div className='site-layout-content'>
-          <Row gutter={[16, 16]} justify='center'>
-            {mallItems.length === 0 ? <Spin /> : renderCard(mallItems)}
-          </Row>
+          <Collapse defaultActiveKey={['1']} onChange={callback}>
+            <Panel header='쿠팡' key='1'>
+              <p>
+                <Row gutter={[16, 16]} justify='center'>
+                  {mallItems.length === 0 ? <Spin /> : renderCard(mallItems)}
+                </Row>
+              </p>
+            </Panel>
+            <Panel header='This is panel header 2' key='2'>
+              <p>{1}</p>
+            </Panel>
+            <Panel header='This is panel header 3' key='3'>
+              <p>{2}</p>
+            </Panel>
+          </Collapse>
+          ,
         </div>
-        <Button onClick={() => dispatch(action.decreaseAction())}>-</Button>
-        {number}
-        <Button onClick={() => dispatch(action.increaseAction())}>+</Button>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©2018 Created by Ant UED

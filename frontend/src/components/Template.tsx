@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   Layout,
   Menu,
@@ -11,220 +11,75 @@ import {
   Spin,
   Collapse,
 } from 'antd';
+
+import * as API from 'api/api';
+import { IData } from 'store/feature/mallitemSlice';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'store/index';
-// import * as action from 'store/mallReducer';
-// import { getItems } from '../api/api';
+import { RootState } from 'store/store';
 import MallCard from './MallCards';
 import ImgA from '../asset/img/img/react.png';
-// import ImgB from '../asset/img/img/watch.jpg';`
-
-interface IData {
-  product_title: string;
-  product_price: string;
-  product_thumbnail: string;
-  product_url: string;
-  product_rating: number;
-  product_rating_cnt: string;
-}
 
 function Template() {
   const dispatch = useDispatch();
-  console.log(dispatch);
-  const { number } = useSelector((state: RootState) => state.numberReducer);
-  console.log(number);
-  const [mallItems, setMallItems] = useState<any>([]);
-
-  // const apiData: IData[] = [
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  //   {
-  //     name: '애플워치',
-  //     price: '320,000',
-  //     thumbnail: ImgB,
-  //     goodsUrl: 'https://google.com',
-  //     rating: 1,
-  //     rating_cnt: 2,
-  //   },
-  // ];
-
+  const items = useSelector((state: RootState) => state.mallItem.items);
   const { Search } = Input;
-
-  const getItemsApi = () => {
-    getItems().then((res) => setMallItems(res));
-    console.log(mallItems);
+  const apiCoupang = async (query: string) => {
+    const param = { query };
+    // 응답 메시지 디폴트 값
+    let responseData = {
+      msg: 'NO_RESPONSE',
+      data: [],
+      code: 0,
+    };
+    try {
+      responseData = await API.ajaxCoupang(param);
+      if (responseData.code === 200) return responseData.data;
+      dispatch({ type: 'SET_ITEM_COUPANG', payload: responseData.data });
+    } catch (e) {
+      console.log(e);
+    }
+    return responseData.data;
+  };
+  const apiDaangn = async (query: string) => {
+    const param = { query };
+    // 응답 메시지 디폴트 값
+    let responseData = {
+      msg: 'NO_RESPONSE',
+      data: [],
+      code: 0,
+    };
+    try {
+      responseData = await API.ajaxDaaangn(param);
+      if (responseData.code === 200) return responseData.data;
+      dispatch({ type: 'SET_ITEM_DAANGN', payload: responseData.data });
+    } catch (e) {
+      console.log(e);
+    }
+    return responseData.data;
+  };
+  const apiHomenshopping = async (query: string) => {
+    const param = { query };
+    // 응답 메시지 디폴트 값
+    let responseData = {
+      msg: 'NO_RESPONSE',
+      data: [],
+      code: 0,
+    };
+    try {
+      responseData = await API.ajaxHomenshopping(param);
+      if (responseData.code === 200) return responseData.data;
+      dispatch({ type: 'SET_ITEM_HOMENSHOPPING', payload: responseData.data });
+    } catch (e) {
+      console.log(e);
+    }
+    return responseData.data;
   };
 
   useEffect(() => {
-    getItemsApi();
+    const query = '삼겹살';
+    apiCoupang(query);
   }, []);
-
-  // const increaseModule = () => {
-  //   console.log('asd');
-  //   dispatch(action.increaseAction);
-  // };
-
-  // const decreaseModule = () => {
-  //   dispatch(action.decreaseAction);
-  // };
 
   const onSearch = (value: any) => console.log(value);
   const { Panel } = Collapse;
@@ -234,16 +89,16 @@ function Template() {
   };
 
   const renderCard = (itemList: IData[]): React.ReactNode => {
-    return itemList.map((item: IData, index: number) => {
+    return itemList.map((item, index: number) => {
       return (
         <MallCard
           key={index}
-          name={item.product_title}
-          price={item.product_price}
-          thumbnail={item.product_thumbnail}
-          goodsUrl={item.product_url}
-          rating={Number(item.product_rating)}
-          rating_cnt={item.product_rating_cnt}
+          product_title={item.product_title}
+          product_price={item.product_price}
+          product_thumbnail={item.product_thumbnail}
+          product_url={item.product_url}
+          product_rating={Number(item.product_rating)}
+          product_rating_cnt={item.product_rating_cnt}
         />
       );
     });
@@ -286,7 +141,11 @@ function Template() {
             <Panel header='쿠팡' key='1'>
               <p>
                 <Row gutter={[16, 16]} justify='center'>
-                  {mallItems.length === 0 ? <Spin /> : renderCard(mallItems)}
+                  {items.coupang.length === 0 ? (
+                    <Spin />
+                  ) : (
+                    renderCard(items.coupang)
+                  )}
                 </Row>
               </p>
             </Panel>

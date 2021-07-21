@@ -42,7 +42,7 @@ const mallItemSlice = createSlice({
   reducers: {
     SET_ITEM_COUPANG: (state, action) => {
       const nextState = state;
-      nextState.status.coupang = 'idle';
+      nextState.status.coupang = 'pending';
       nextState.items.coupang = action.payload;
     },
     SET_ITEM_DAAANGN: (state, action) => {

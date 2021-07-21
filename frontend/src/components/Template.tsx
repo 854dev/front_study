@@ -13,7 +13,8 @@ import {
 } from 'antd';
 
 import * as API from 'api/api';
-import { IData } from 'store/feature/mallitemSlice';
+import mallItemSlice, { IData } from 'store/feature/mallitemSlice';
+import { AxiosResponse } from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/store';
@@ -27,19 +28,15 @@ function Template() {
   const apiCoupang = async (query: string) => {
     const param = { query };
     // 응답 메시지 디폴트 값
-    let responseData = {
-      msg: 'NO_RESPONSE',
-      data: [],
-      code: 0,
-    };
     try {
-      responseData = await API.ajaxCoupang(param);
-      if (responseData.code === 200) return responseData.data;
-      dispatch({ type: 'SET_ITEM_COUPANG', payload: responseData.data });
+      const acp: AxiosResponse = await API.ajaxCoupang(param);
+      if (acp.status === 200) {
+        const responseData = acp.data.coupang;
+        dispatch(mallItemSlice.actions.SET_ITEM_COUPANG(responseData.data));
+      }
     } catch (e) {
       console.log(e);
     }
-    return responseData.data;
   };
   const apiDaangn = async (query: string) => {
     const param = { query };
@@ -52,7 +49,10 @@ function Template() {
     try {
       responseData = await API.ajaxDaaangn(param);
       if (responseData.code === 200) return responseData.data;
-      dispatch({ type: 'SET_ITEM_DAANGN', payload: responseData.data });
+      dispatch({
+        type: mallItemSlice.actions.SET_ITEM_DAAANGN,
+        payload: { coupang: responseData.data },
+      });
     } catch (e) {
       console.log(e);
     }
@@ -69,19 +69,19 @@ function Template() {
     try {
       responseData = await API.ajaxHomenshopping(param);
       if (responseData.code === 200) return responseData.data;
-      dispatch({ type: 'SET_ITEM_HOMENSHOPPING', payload: responseData.data });
+      dispatch({
+        type: mallItemSlice.actions.SET_ITEM_HOMEANDSHOPPING,
+        payload: { coupang: responseData.data },
+      });
     } catch (e) {
       console.log(e);
     }
     return responseData.data;
   };
 
-  useEffect(() => {
-    const query = '삼겹살';
-    apiCoupang(query);
-  }, []);
-
-  const onSearch = (value: any) => console.log(value);
+  const onSearch = (value: any) => {
+    apiCoupang(value);
+  };
   const { Panel } = Collapse;
 
   const callback = (key: any) => {

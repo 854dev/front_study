@@ -14,7 +14,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/index';
 // import * as action from 'store/mallReducer';
-import { getItems } from '../api/api';
+// import { getItems } from '../api/api';
 import MallCard from './MallCards';
 import ImgA from '../asset/img/img/react.png';
 // import ImgB from '../asset/img/img/watch.jpg';`

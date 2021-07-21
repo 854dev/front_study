@@ -29,6 +29,7 @@
   ] /* Prettier에서 인식하는 코드 포맷 오류를 ESLint 오류로 출력 */,
   "rules": {
     "react/prop-types": 0,
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "@typescript-eslint/naming-convention": "off"
   }
 }

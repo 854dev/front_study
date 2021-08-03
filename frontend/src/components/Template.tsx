@@ -6,10 +6,12 @@ import {
   Menu,
   Breadcrumb,
   Row,
+  Col,
   Input,
   Space,
   Spin,
   Collapse,
+  Card,
 } from 'antd';
 
 import * as API from 'api/api';
@@ -38,20 +40,20 @@ function Template() {
       console.log(e);
     }
   };
-  const apiDaangn = async (query: string) => {
-    const param = { query };
+  const apiDaangn = () => {
+    // const param = { query };
     // 응답 메시지 디폴트 값
-    let responseData = {
+    let responseData: any = {
       msg: 'NO_RESPONSE',
       data: [],
       code: 0,
     };
     try {
-      responseData = await API.ajaxDaaangn(param);
+      responseData = API.ajaxDaaangn();
       if (responseData.code === 200) return responseData.data;
       dispatch({
         type: mallItemSlice.actions.SET_ITEM_DAAANGN,
-        payload: { coupang: responseData.data },
+        payload: responseData.data,
       });
     } catch (e) {
       console.log(e);
@@ -80,7 +82,7 @@ function Template() {
   };
 
   const onSearch = (value: any) => {
-    apiCoupang(value);
+    apiDaangn();
   };
   const { Panel } = Collapse;
 
@@ -137,26 +139,53 @@ function Template() {
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <div className='site-layout-content'>
-          <Collapse defaultActiveKey={['1']} onChange={callback}>
-            <Panel header='쿠팡' key='1'>
-              <p>
-                <Row gutter={[16, 16]} justify='center'>
-                  {items.coupang.length === 0 ? (
-                    <Spin />
-                  ) : (
-                    renderCard(items.coupang)
-                  )}
-                </Row>
-              </p>
-            </Panel>
-            <Panel header='This is panel header 2' key='2'>
-              <p>{1}</p>
-            </Panel>
-            <Panel header='This is panel header 3' key='3'>
-              <p>{2}</p>
-            </Panel>
-          </Collapse>
-          ,
+          <Row gutter={[16, 16]} justify='center'>
+            <Col span={4}>
+              <Card>
+                {items.daaangn.length === 0 ? (
+                  <Spin />
+                ) : (
+                  renderCard(items.daaangn)
+                )}
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card>
+                {items.daaangn.length === 0 ? (
+                  <Spin />
+                ) : (
+                  renderCard(items.daaangn)
+                )}
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card>
+                {items.daaangn.length === 0 ? (
+                  <Spin />
+                ) : (
+                  renderCard(items.daaangn)
+                )}
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card>
+                {items.daaangn.length === 0 ? (
+                  <Spin />
+                ) : (
+                  renderCard(items.daaangn)
+                )}
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card>
+                {items.daaangn.length === 0 ? (
+                  <Spin />
+                ) : (
+                  renderCard(items.daaangn)
+                )}
+              </Card>
+            </Col>
+          </Row>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>

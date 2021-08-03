@@ -2,8 +2,8 @@ import React from 'react';
 import Layout from './components/Template';
 import 'antd/dist/antd.css';
 
-function App() {
+const App: React.FC = () => {
   return <Layout />;
-}
+};
 
 export default App;

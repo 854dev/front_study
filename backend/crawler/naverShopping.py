@@ -5,8 +5,7 @@ import json
 
 
 def naver_shopping_crawl(keyword):
-    base_url = 'https://search.shopping.naver.com/search/all'
-    # query=자전거&cat_id=&frm=NVSHATC
+    parse_list = []
     ua = UserAgent()
     url = 'https://search.shopping.naver.com/search/all'
     headers = {
@@ -17,15 +16,28 @@ def naver_shopping_crawl(keyword):
         'cat_id': None,
         'frm': 'NVSHATC'
     }
-    res = requests.get(url,headers=headers,params=param)
+    res = requests.get(url, headers=headers, params=param)
     html = BeautifulSoup(res.text, 'html.parser')
-    title_list = html.select('#__next > div > div.style_container__1YjHN > div.style_inner__18zZX > div.style_content_wrap__1PzEo > div.style_content__2T20F > ul > div > div > li > div > div.basicList_info_area__17Xyo > div.basicList_title__3P9Q7 > a')
+    title_list = html.select(
+        '#__next > div > div.style_container__1YjHN > div.style_inner__18zZX > div.style_content_wrap__1PzEo > div.style_content__2T20F > ul > div > div > li > div > div.basicList_info_area__17Xyo > div.basicList_title__3P9Q7 > a')
     print(title_list)
     more_list = html.select('#__NEXT_DATA__')
-    text = more_list[0].get_text().replace('<script id="__NEXT_DATA__" type="application/json">','').replace('</script>','')
-    data_json = json(text)
-    print(data_json)
-if __name__=="__main__":
+    text = more_list[0]
+    parsed_data = text.contents
+    data_json = json.loads(parsed_data[0])
+    product_list = data_json['props']['pageProps']['initialState']['products']['list']
+    for product in product_list:
+        ret_params = {
+            "title": product['item']['productTitle'],
+            "price": product['item']['lowPrice'],
+            "thumbnail": product['item']['imageUrl'],
+            "url": 'https://search.shopping.naver.com/catalog/' + product['item']['id'],
+            "rating": product['item']['reviewCount'],
+            "review_num": product['item']['productTitle'],
+        }
+        parse_list.append(ret_params)
+    return parse_list
+
+
+if __name__ == "__main__":
     naver_shopping_crawl("애플")
-
-

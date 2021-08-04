@@ -84,6 +84,25 @@ function Template() {
   const onSearch = (value: any) => {
     apiDaangn();
   };
+
+  /** SOV 계산버튼 클릭시 이벤트핸들러 */
+  const handleSov = (value: string) => {
+    const sovEachMall = (keyword: string, itemlist: IData[]) => {
+      let shareOfVoice = 0;
+      shareOfVoice = itemlist.reduce((p: any, c: any) => {
+        if (c.product_title.includes(keyword)) {
+          return p + 1 / itemlist.length;
+        }
+        return p;
+      }, 0);
+      return shareOfVoice;
+    };
+    console.log(Object.values(items));
+    Object.values(items).forEach((elem) => {
+      console.log(sovEachMall(value, elem));
+    });
+  };
+
   const { Panel } = Collapse;
 
   const callback = (key: any) => {
@@ -129,6 +148,11 @@ function Template() {
             <Search
               placeholder='input search text'
               onSearch={onSearch}
+              enterButton
+            />
+            <Search
+              placeholder='SOV 계산하기'
+              onSearch={handleSov}
               enterButton
             />
           </Space>

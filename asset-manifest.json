@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/854dev/front_study/static/css/main.2e0dfc83.chunk.css",
+    "main.js": "/854dev/front_study/static/js/main.13acbc03.chunk.js",
+    "main.js.map": "/854dev/front_study/static/js/main.13acbc03.chunk.js.map",
+    "runtime-main.js": "/854dev/front_study/static/js/runtime-main.532d58a7.js",
+    "runtime-main.js.map": "/854dev/front_study/static/js/runtime-main.532d58a7.js.map",
+    "static/css/2.3089e125.chunk.css": "/854dev/front_study/static/css/2.3089e125.chunk.css",
+    "static/js/2.43ee67fa.chunk.js": "/854dev/front_study/static/js/2.43ee67fa.chunk.js",
+    "static/js/2.43ee67fa.chunk.js.map": "/854dev/front_study/static/js/2.43ee67fa.chunk.js.map",
+    "static/js/3.226b9c26.chunk.js": "/854dev/front_study/static/js/3.226b9c26.chunk.js",
+    "static/js/3.226b9c26.chunk.js.map": "/854dev/front_study/static/js/3.226b9c26.chunk.js.map",
+    "index.html": "/854dev/front_study/index.html",
+    "static/css/2.3089e125.chunk.css.map": "/854dev/front_study/static/css/2.3089e125.chunk.css.map",
+    "static/css/main.2e0dfc83.chunk.css.map": "/854dev/front_study/static/css/main.2e0dfc83.chunk.css.map",
+    "static/js/2.43ee67fa.chunk.js.LICENSE.txt": "/854dev/front_study/static/js/2.43ee67fa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.532d58a7.js",
+    "static/css/2.3089e125.chunk.css",
+    "static/js/2.43ee67fa.chunk.js",
+    "static/css/main.2e0dfc83.chunk.css",
+    "static/js/main.13acbc03.chunk.js"
+  ]
+}

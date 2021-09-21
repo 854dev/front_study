@@ -29,9 +29,9 @@ def get_hns_data(keyword):
 
                 data = {
                     'product_title': li.select_one('div.textZone > p.goodsName > a > span').text,
-                    'product_thumbnail': li.select_one('div.img > a > img').get('src'),
                     'product_price': li.select_one('div.textZone > p.price > em').text if li.select_one(
                         'div.textZone > p.price > em') else li.select_one('div.textZone > p.sale_price > em').text,
+                    'product_thumbnail': li.select_one('div.img > a > img').get('src'),
                     'product_url': li.select_one('div.img > a').get('href'),
                     'product_rating': 0,
                     'product_rating_cnt': 0,

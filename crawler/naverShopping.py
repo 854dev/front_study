@@ -28,12 +28,12 @@ def naver_shopping_crawl(keyword):
     product_list = data_json['props']['pageProps']['initialState']['products']['list']
     for product in product_list:
         ret_params = {
-            "title": product['item']['productTitle'],
-            "price": product['item']['lowPrice'],
-            "thumbnail": product['item']['imageUrl'],
-            "url": 'https://search.shopping.naver.com/catalog/' + product['item']['id'],
-            "rating": product['item']['reviewCount'],
-            "review_num": product['item']['productTitle'],
+            "product_title": product['item']['productTitle'],
+            "product_price": product['item']['lowPrice'],
+            "product_thumbnail": product['item']['imageUrl'],
+            "product_url": 'https://search.shopping.naver.com/catalog/' + product['item']['id'],
+            "product_rating": product['item']['reviewCount'],
+            "product_rating_cnt": product['item']['productTitle'],
         }
         parse_list.append(ret_params)
     return parse_list

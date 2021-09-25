@@ -11,7 +11,10 @@ crawl_function_info = {
 }
 
 
-def get_crawl(crawl_code, keyword):
+def get_crawl(crawl_code:int, keyword:str):
+    """
+    각 크롤러를 실행해서 한 result로 만들어 반환하는 메소드
+    """
     res = crawl_function_info[crawl_code](keyword)
     print(crawl_code)
     if type(res) == dict:
@@ -23,12 +26,16 @@ def get_crawl(crawl_code, keyword):
     return data
 
 
-def input_generator(result):
+def input_generator(result:list):
     for row in result:
         yield tuple(row.values())
 
 
-def return_data(keyword):
+def return_data(keyword:str):
+    """
+    이미 검색한 적이 있는 키워드에 대해선 DB에서 데이터를 꺼내서 반환하고, 그렇지 않은 키워드에 대해선 크롤링한 데이터를 반환하는 메소드
+    수정 및 고도화 필요
+    """
     dbcon = DBConn()
     cursor = dbcon.conn.cursor()
     cursor.execute(f"select * from t_keyword_search_count where keyword='{keyword}'")
@@ -40,7 +47,10 @@ def return_data(keyword):
     return item_result
 
 
-def get_items_from_db(keyword):
+def get_items_from_db(keyword:str):
+    """
+    DB에서 키워드에 대한 크롤링된 데이터 가져와서 반환하는 메소드
+    """
     dbcon = DBConn()
     cursor = dbcon.conn.cursor()
     cursor.execute(f"select * from t_crawled_data where keyword='{keyword}'")
@@ -49,7 +59,10 @@ def get_items_from_db(keyword):
     return item_result
 
 
-def run_crawl(keyword):
+def run_crawl(keyword:str):
+    """
+    입력한 키워드에 대해 크롤링해서 DB에 적재하고 크롤링한 데이터를 반환하는 메소드
+    """
     dbcon = DBConn()
     pool = Pool(processes=4)
     args = [(i, keyword) for i in range(4)]

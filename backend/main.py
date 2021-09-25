@@ -20,7 +20,9 @@ app.add_middleware(
 def read_root():
     return {"Hello": "World"}
 
+def call_crawler(query : str):
 
+    return {'msg':'success'}
 
 #
 #

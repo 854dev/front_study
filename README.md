@@ -6,10 +6,12 @@
 ## 프론트엔드
 # 패키지 설치
 cd frontend
+
 yarn
 
 # 프론트엔드 서버켜기
 cd frontend
+
 yarn start
 
 ## 백엔드

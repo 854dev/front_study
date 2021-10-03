@@ -1,0 +1,9 @@
+build/
+dist/
+node_modules/
+config/
+scripts/
+*.js
+# auto-generated files
+src/common/const/codes.ts
+src/api-model.d.ts
